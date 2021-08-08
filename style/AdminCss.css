@@ -1,0 +1,144 @@
+body{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,50,0.5),rgba(0,0,50,0.5)),url(../logo.jpeg);
+  background-size: cover;
+  background-position: center;
+  font-family: sans-serif;
+  direction:ltr ;
+  
+}
+
+.login{
+  margin-top:100px ;
+  color: #fff;
+  text-transform: uppercase;
+  transition: all 4s ease-in-out;
+
+}
+.login h1{
+  font-size: 32px;
+  line-height: 10px;
+}
+.login h2{
+  font-size: 30px;
+  color:cornsilk;
+}
+
+
+
+
+
+form{
+  margin-top:50px ;
+  transition: all 4s ease-in-out;
+  border-width: 10px;
+  color:black;
+  
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    text-align: left;
+    font-family: serif	;
+
+    
+    
+}
+.title{
+  text-align: left;
+  font-family: cursive;
+}
+input[type="submit"]{
+  background:black;
+  color: white;
+  border: 1px solid white;
+  text-align: center;
+  border-radius: 20px;
+  border-style:mixed;
+
+  
+}
+   
+    
+    
+div {
+      border-radius: 10px;
+      padding: 20px;
+
+     }
+    
+
+    
+  
+  
+  
+    
+    
+
+input{
+  height: 15px;
+  width: 100PX;
+  border-radius: 20px;
+
+  
+
+}
+
+
+
+.topnav {
+  
+  overflow: hidden;
+  border-style: outset;
+  color: black;
+
+}
+.topnav a,button {
+  float: left;
+  color: #e4bad4;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+table {
+  text-align: right;
+  float: left;
+  width: 69%;
+
+  
+
+
+}
+th {
+  border: 1px solid black;
+  width: 8%;
+  direction: ltr;
+  text-align: left;
+  color: black;
+
+  
+
+
+}
+td {
+  border: 1px solid black;
+  width: 15%;
+  direction: ltr;
+  text-align: left;
+  color: black;
+
+  
+
+
+}
+
+
+

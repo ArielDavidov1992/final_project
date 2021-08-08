@@ -1,72 +1,67 @@
 <?php
 class User
 {
-    private $ID;
-    private $FirstName;
-    private $LastName;
-    private $E_mail;
-    private $PhoneNumber;
-    private $PassWord;
+    protected $Id;
+    protected $FirstName;
+    protected $LastName;
+    protected $PhoneNumber;
+    protected $Email;
+    protected $Passwod;
 
 
-    public function __construct($ID,$FirstName,$LastName,$E_mail,$PhoneNumber,$PassWord)
+    
+
+   public function getId()
     {
-        $this->ID=$ID;
-        $this->FirstName=$FirstName;
-        $this->LastName=$LastName;
-        $this->E_mail=$E_mail;
-        $this->PhoneNumber=$PhoneNumber;
-        $this->PassWord=$PassWord;
+        return $this->Id;
+    }
+    public function setId($ID)
+    {
+        $this->Id=$ID;
     }
 
-   public function get_ID()
-    {
-        return $this->ID;
-    }
-    public function set_ID($ID)
-    {
-        $this->ID=$ID;
-    }
-
-   public function get_FirstName()
+   public function getFirstName()
     {
         return $this->FirstName;
     }
-    public function set_FirstName($FirstName)
+    public function setFirstName($newFirstName)
     {
-        $this->FirstName=$FirstName;
+        $this->FirstName=$newFirstName;
     }
 
-    public function get_LastName()
+    public function getLastName()
     {
         return $this->LastName;
     }
-    public function set_LastName($LastName)
+    public function setLastName($newLastName)
     {
-        $this->LastName=$LastName;
+        $this->LastName=$newLastName;
     }
 
-    public function get_E_mail()
+    public function getEmail()
     {
-        return $this->E_mail;
+        return $this->Email;
     }
-    public function set_E_mail($E_mail)
+    public function setEmail($newEmail)
     {
-        $this->E_mail=$E_mail;
+        $this->Email=$newEmail;
     }
 
-    public function get_PhoneNumber()
+    public function getPhoneNumber()
     {
         return $this->PhoneNumber;
     }
-    public function set_PhonNumber($PhoneNumber)
+    public function setPhoneNumber($newPhoneNumber)
     {
-        $this->PhoneNumber=$PhoneNumber;
+        $this->PhoneNumber=$newPhoneNumber;
+    }
+    public function getPasswod(){
+        return $this->Passwod;
     }
 
-    public function set_Password($newPassWord)
+    public function setPasswod($newPassWord)
     {
-        $this->PassWord=$newPassWord;
+        $this->Passwod=$newPassWord;
     }
 
 }

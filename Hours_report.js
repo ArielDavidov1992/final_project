@@ -5,15 +5,17 @@ let lastDay = new Date(y, m + 1, 0);
 let Month =date.getMonth()+1;
 let multiDay=["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"]
 let flag=parseInt(firstDay.getDay());
-let form_table="<form>";
+
 let tbl_time="<table id='tabDays'>";
 			
 			for(let i=firstDay.getUTCDay();i<=lastDay.getUTCDate()+1;i++)//Rows
 			{
+				tbl_time+="<form id=activity >"
 				tbl_time+="<tr>";
 				
 				for(let j=1;j<=1;j++)//Columns
 				{
+					
                     tbl_time+="<td>"+multiDay[flag]+"</td>";
                    
 					tbl_time+="<td>"+i+"/"+Month+"/"+date.getUTCFullYear()+"</td>";
@@ -28,8 +30,10 @@ let tbl_time="<table id='tabDays'>";
 				
 				tbl_time+="</tr>";
 			}
+			tbl_time+="</form>";
 			tbl_time+="</table>";
-            form_table+="</form>";
+			
+           
 			
 			document.write(tbl_time); 
          
