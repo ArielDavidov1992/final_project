@@ -29,3 +29,10 @@
          
      </body>
 </html>
+<?php
+for($i=6;$i<cal_days_in_month(CAL_GREGORIAN, 8, 2021);$i++){
+    if(isset($_POST['class'.$i]))
+    
+}
+
+?>

@@ -18,7 +18,7 @@ let tbl_activity="<table id='tabActivity'>";
                     tbl_activity+="<td>"+multiDay[flag]+"</td>";
                    
 					tbl_activity+="<td>"+i+"/"+Month+"/"+date.getUTCFullYear()+"</td>";
-                    tbl_activity+="<td>" +"<input type='text' class='TimeField' name='class' placeholder='כיתה'>" +"</td>";
+                    tbl_activity+="<td>" +"<input type='text' class='TimeField' name="+"class"+i+" placeholder='כיתה'>" +"</td>";
                     tbl_activity+="<td>" +"<input type='text' class='TimeField' name='place' placeholder='מקום הפעילות'>" +"</td>";
                     tbl_activity+="<td>" +"<input type='text' class='TimeField' name='topic' placeholder='נושא הפעילות'>" +"</td>";
                     tbl_activity+="<td>" +"<input type='text' class='TimeField' name='start' placeholder='שעת התחלה'>" +"</td>";
@@ -33,7 +33,7 @@ let tbl_activity="<table id='tabActivity'>";
 				tbl_activity+="</tr>";
 			}
 			
-			tbl_activity+="<input type='submit' class='TimeField'  value='שמור נתונים'>";
+			tbl_activity+="<input name='saveDetails' type='submit' class='TimeField'  value='שמור נתונים'>";
 			tbl_activity+="</form>";
 			tbl_activity+="</table>";
             

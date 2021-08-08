@@ -1,6 +1,6 @@
 <!-- Ariel & yarden -->
 <?php
-//requires
+require_once("activity_class.php");
 require_once ("bnot_sherut.php");
 require_once ("meneger.php");
 require_once("garein.php");
@@ -294,6 +294,20 @@ public function getRacezetbyFullName(string $FirstName,string $LastName)
    $Rac = $statement->fetchObject('racazot');
    $this->disconnect();
   return $Rac;
+}
+public function InsertActivites(array $activ)
+{
+   $this->connect();
+   for($i=0;$i<count($activ);$i++){
+
+      $statement = $this->connection->prepare("INSERT INTO activities (Id, DateActivity, Class, PlaceOfActivity, 	TopicActivity, NumberOfStudents, StartTime ,EndTime) 
+      VALUES (:Id,:DateActivity,:Class,:PlaceOfActivity,:TopicActivity,:NumberOfStudents,:StartTime ,:EndTime)");
+      $statement->execute([':Id'=>$activ[$i]->getId,':DateActivity'=>$activ[$i]->getDate,'Class'=>$activ[$i]->getClass,':PlaceOfActivity'=>$activ[$i]->getPlaceOfActivity,
+      ':TopicActivity'=>$activ[$i]->getTopicActivity,':NumberOfStudents'=>$activ[$i]->getNumberOfStudents,'StartTime'=>$activ[$i]->getStartTime,'EndTime'=>$activ[$i]->getEndTime]);
+   }
+ 
+
+ $this->disconnect();
 }
 
 
