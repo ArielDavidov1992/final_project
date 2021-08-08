@@ -1,5 +1,6 @@
 <!-- Ariel & yarden -->
 <?php
+//requires
 require_once ("bnot_sherut.php");
 require_once ("meneger.php");
 require_once("garein.php");
