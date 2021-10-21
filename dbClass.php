@@ -309,8 +309,64 @@ public function InsertActivites(array $activ)
 
  $this->disconnect();
 }
+public function InsertActiv($Id,$DateActivity,$Class,$PlaceOfActivity,$TopicActivity,$NumberOfStudents,$StartTime,$EndTime)
+{
+   $this->connect();
+   $statement = $this->connection->prepare("INSERT INTO activities (Id, DateActivity, Class, PlaceOfActivity, 	TopicActivity, NumberOfStudents, StartTime ,EndTime) 
+   VALUES (:Id,:DateActivity,:Class,:PlaceOfActivity,:TopicActivity,:NumberOfStudents,:StartTime ,:EndTime)");
+   $statement->execute([':Id'=>$Id,':DateActivity'=>$DateActivity,':Class'=>$Class,':PlaceOfActivity'=>$PlaceOfActivity,
+   ':TopicActivity'=>$TopicActivity,':NumberOfStudents'=>$NumberOfStudents,':StartTime'=>$StartTime,':EndTime'=>$EndTime]);
 
+ $this->disconnect();
+}
 
+public function getactivitiesById(int $Id)
+{
+   $this->connect();
+   $activitiesArray = array();
+   $statement = $this->connection->prepare("SELECT * FROM activities WHERE  Id = :Id");
+   $statement->execute([':Id'=>$Id]);
+   while($row = $statement->fetchObject('activities')) 
+   {
+         $activitiesArray[] = $row;
+       
+   }
+  $this->disconnect();
+  return $activitiesArray;
+}
+public function fillDates($Id,$DateActivity)
+{
+   $this->connect();
+   $statement = $this->connection->prepare("INSERT INTO activities (Id, DateActivity) 
+   VALUES (:Id,:DateActivity)");
+   $statement->execute([':Id'=>$Id,':DateActivity'=>$DateActivity]);
+
+ $this->disconnect();
+}
+public function getDatesById($Id,$DateActivity)
+{
+   $this->connect();
+   
+   $statement = $this->connection->prepare("SELECT DateActivity FROM activities WHERE  Id = :Id AND DateActivity = :DateActivity");
+   $statement->execute([':Id'=>$Id,':DateActivity'=>$DateActivity]);
+   $row = $statement->fetchObject('activities');
+   
+   $Firstdate = $row;
+       
+   
+  $this->disconnect();
+  return $Firstdate;
+}
+public function UpdateActiv($Id,$DateActivity,$Class,$PlaceOfActivity,$TopicActivity,$NumberOfStudents,$StartTime,$EndTime)
+{
+   $this->connect();
+   $statement = $this->connection->prepare("UPDATE activities SET Class = :Class, PlaceOfActivity = :PlaceOfActivity, TopicActivity= :TopicActivity, NumberOfStudents = :NumberOfStudents, StartTime = :StartTime , EndTime = :EndTime  WHERE 
+   Id = :Id AND DateActivity = :DateActivity");
+   $statement->execute([':Id'=>$Id,':DateActivity'=>$DateActivity,':Class'=>$Class,':PlaceOfActivity'=>$PlaceOfActivity,
+   ':TopicActivity'=>$TopicActivity,':NumberOfStudents'=>$NumberOfStudents,':StartTime'=>$StartTime,':EndTime'=>$EndTime]);
+
+ $this->disconnect();
+}
 
 
 }

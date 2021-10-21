@@ -1,5 +1,5 @@
 <?php
-class activity
+class activities
 {
     protected $Id;
     protected $DateActivity;
@@ -11,7 +11,7 @@ class activity
     protected $EndTime;
 
 
-    
+  
 
    public function getId()
     {
