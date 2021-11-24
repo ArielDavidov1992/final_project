@@ -1,7 +1,10 @@
-
 <?php
+
 //Ariel &yarden
 require_once ("dbClass.php");
+if(isset($_POST['Id'])){
+    checkPassword((int)$_POST['Id'],$_POST['PassWord']);
+}
 function writeToFile($data,$fileName) //function to  write File 
 {
 	
@@ -14,6 +17,7 @@ function writeToFile($data,$fileName) //function to  write File
 }
 function checkPassword(int $Id,string $Pass) //function to check password
 {
+    
      $db= new dbClass();
   if($incriptPass=$db->getPassByIdAdmin((int)$Id)) 
    {
@@ -32,7 +36,9 @@ function checkPassword(int $Id,string $Pass) //function to check password
     if(password_verify((trim($Pass)),$incriptPass))    
     {
         echo "The pessword is good"."<br>";
-        header('Location: hours_report.html');
+        session_start();
+        $_SESSION['idRacezt'] = $Id;
+        header('Location: hours_report.php');
     }
     else
     echo "The password Incorrect";
@@ -42,7 +48,7 @@ function checkPassword(int $Id,string $Pass) //function to check password
     if(password_verify((string)$Pass,$incriptPass))    
     {
         echo "The pessword is good"."<br>";
-        session_start();
+      
         $_SESSION['id'] = $Id;
         header('Location: activities_report.php');
     }
@@ -55,9 +61,7 @@ function checkPassword(int $Id,string $Pass) //function to check password
 
 
 }
-if(isset($_POST['Id'])){
-    checkPassword((int)$_POST['Id'],$_POST['PassWord']);
-}
+
 
 
 

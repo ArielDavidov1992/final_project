@@ -32,26 +32,28 @@
      
 
 <?php
+session_start();
  require_once ("dbClass.php");
  require_once("helpFunction.php");
  require_once("activity_class.php");
+ 
 $db=new dbClass();
 $Date=date("d-m-Y"); //define the date
 $firstDay=date("01-m-Y");
 $firstDayInWeek=date("w",strtotime($firstDay));
 $lastDay=date("t");
-$temp=$db->getDatesById(41257,$firstDay);
+$temp=$db->getDatesById($_SESSION['id'],$firstDay);
 if($temp==false)
 {
     for($i=1;$i<=$lastDay;$i++)
  {
-    $db->InsertActiv(41257,date('d-m-Y', strtotime(date(''.$i.'-m-Y'))),0,0,0,0,0,0);
+    $db->InsertActiv($_SESSION['id'],date('d-m-Y', strtotime(date(''.$i.'-m-Y'))),0,0,0,0,0,0);
         
  }
 
 }
 
-$AllActivities=$db-> getactivitiesById(41257);
+$AllActivities=$db-> getactivitiesByIdOfThisMonth($_SESSION['id'],'%-'.date('m').'-%');
 
 $multiDay=array();
 $multiDay=["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
@@ -102,15 +104,15 @@ echo "</form></table>";
 for($i=1;$i<=$lastDay;$i++) //update the data in the DB
 {
     
-    if($_POST['class'.$i]!=""){
+    if(isset($_POST['class'.$i])&& $_POST['class'.$i]!=""){
         
-        $db->UpdateActiv(41257,date('d-m-Y', strtotime(date(''.$i.'-m-Y'))),$_POST['class'.$i],$_POST['place'.$i],$_POST['topic'.$i],$_POST['participants'.$i],$_POST['start'.$i],$_POST['end'.$i]);
+        $db->UpdateActiv($_SESSION['id'],date('d-m-Y', strtotime(date(''.$i.'-m-Y'))),$_POST['class'.$i],$_POST['place'.$i],$_POST['topic'.$i],$_POST['participants'.$i],$_POST['start'.$i],$_POST['end'.$i]);
         
     }
 }
     
 
-  
+
     
 
 

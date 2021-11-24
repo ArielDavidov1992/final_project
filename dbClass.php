@@ -99,8 +99,9 @@ public function UpdateBatsherut(bnot_sherut $bat)
    $this->connect();
    $statement = $this->connection->prepare("UPDATE bnot_sherut SET Id=:Id,FirstName=:FirstName,LastName=:LastName,
    PhoneNumber=:PhoneNumber,Email=:Email,NameGareen=:NameGareen,NameTeken=:NameTeken,Passwod=:Passwod WHERE Id = :id");
+   $encodedPassWord=password_hash($bat->getPasswod(),PASSWORD_DEFAULT);
    $statement->execute([':Id'=>$bat->getId(),':FirstName'=>$bat->getFirstName(),":LastName"=>$bat->getLastName(),
-   ':PhoneNumber'=>$bat->getPhoneNumber(),':Email'=>$bat->getEmail(),':NameGareen'=>$bat->getNameGareen(),':NameTeken'=>$bat->getNameTeken(),':Passwod'=>$bat->getPasswod(),':id'=>$bat->getID()]);
+   ':PhoneNumber'=>$bat->getPhoneNumber(),':Email'=>$bat->getEmail(),':NameGareen'=>$bat->getNameGareen(),':NameTeken'=>$bat->getNameTeken(),':Passwod'=>$encodedPassWord,':id'=>$bat->getID()]);
 
 
  $this->disconnect();
@@ -267,8 +268,9 @@ public function UpdateRacezet(racazot $rac)
    $this->connect();
    $statement = $this->connection->prepare("UPDATE racazot SET Id=:Id,FirstName=:FirstName,LastName=:LastName,
    PhoneNumber=:PhoneNumber,Email=:Email,Passwod=:Passwod WHERE Id = :id");
+   $encodedPassWord=password_hash($rac->getPasswod(),PASSWORD_DEFAULT);
    $statement->execute([':Id'=>$rac->getId(),':FirstName'=>$rac->getFirstName(),":LastName"=>$rac->getLastName(),
-   ':PhoneNumber'=>$rac->getPhoneNumber(),':Email'=>$rac->getEmail(),':Passwod'=>$rac->getPasswod(),':id'=>$rac->getId()]);
+   ':PhoneNumber'=>$rac->getPhoneNumber(),':Email'=>$rac->getEmail(),':Passwod'=>$encodedPassWord,':id'=>$rac->getId()]);
 
 
  $this->disconnect();
@@ -320,12 +322,12 @@ public function InsertActiv($Id,$DateActivity,$Class,$PlaceOfActivity,$TopicActi
  $this->disconnect();
 }
 
-public function getactivitiesById(int $Id)
+public function getactivitiesByIdOfThisMonth(int $Id,$Month )
 {
    $this->connect();
    $activitiesArray = array();
-   $statement = $this->connection->prepare("SELECT * FROM activities WHERE  Id = :Id");
-   $statement->execute([':Id'=>$Id]);
+   $statement = $this->connection->prepare("SELECT * FROM activities WHERE Id = :Id AND DateActivity LIKE :MonthCurrent");
+   $statement->execute([':Id'=>$Id, ':MonthCurrent'=>$Month]);
    while($row = $statement->fetchObject('activities')) 
    {
          $activitiesArray[] = $row;
@@ -334,15 +336,7 @@ public function getactivitiesById(int $Id)
   $this->disconnect();
   return $activitiesArray;
 }
-public function fillDates($Id,$DateActivity)
-{
-   $this->connect();
-   $statement = $this->connection->prepare("INSERT INTO activities (Id, DateActivity) 
-   VALUES (:Id,:DateActivity)");
-   $statement->execute([':Id'=>$Id,':DateActivity'=>$DateActivity]);
 
- $this->disconnect();
-}
 public function getDatesById($Id,$DateActivity)
 {
    $this->connect();
@@ -367,6 +361,54 @@ public function UpdateActiv($Id,$DateActivity,$Class,$PlaceOfActivity,$TopicActi
 
  $this->disconnect();
 }
+public function InsertDay($Id,$FullDate,$StartTime,$EndTime)
+{
+   $this->connect();
+   $statement = $this->connection->prepare("INSERT INTO time_work (Id, FullDate, StartTime ,EndTime) 
+   VALUES (:Id , :FullDate , :StartTime , :EndTime)");
+   $statement->execute([':Id'=>$Id,':FullDate'=>$FullDate,':StartTime'=>$StartTime,':EndTime'=>$EndTime]);
+
+ $this->disconnect();
+}
+public function getdaysByIdOfThisMonth(int $Id,$Month ) //get all days of this month
+{
+   $this->connect();
+   $HoursArray = array();
+   $statement = $this->connection->prepare("SELECT * FROM time_work WHERE Id = :Id AND FullDate LIKE :MonthCurrent");
+   $statement->execute([':Id'=>$Id, ':MonthCurrent'=>$Month]);
+   while($row = $statement->fetchObject('hours')) 
+   {
+         $HoursArray[] = $row;
+       
+   }
+  $this->disconnect();
+  return $HoursArray;
+}
+public function Updateday($Id,$FullDate,$StartTime,$EndTime) // update the day work
+{
+   $this->connect();
+   $statement = $this->connection->prepare("UPDATE time_work SET  StartTime = :StartTime , EndTime = :EndTime  WHERE 
+   Id = :Id AND FullDate = :FullDate");
+   $statement->execute([':Id'=>$Id,':FullDate' => $FullDate, ':StartTime'=>$StartTime,':EndTime'=>$EndTime]);
+
+ $this->disconnect();
+}
+
+public function getDatesByIdRac($Id,$FullDate)
+{
+   $this->connect();
+   
+   $statement = $this->connection->prepare("SELECT FullDate FROM time_work WHERE  Id = :Id AND FullDate = :FullDate");
+   $statement->execute([':Id'=>$Id,':FullDate'=>$FullDate]);
+   $row = $statement->fetchObject('hours');
+   
+   $Firstdate = $row;
+       
+   
+  $this->disconnect();
+  return $Firstdate;
+}
+
 
 
 }

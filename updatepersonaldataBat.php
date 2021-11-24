@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="hi">
 	<head>
@@ -39,7 +43,7 @@
 
                   <label>הכניסי ערך חדש:</label>
                   <input name="val" type="text" class="searchBatsherut"  required/>
-                  <input type="submit" name="btnSearch" class="searchBatsherut" value="Update">
+                  <input type="submit" name="btnSearch" class="searchBatsherut" value="עדכן">
 </div>
             </form> 
             
@@ -49,8 +53,8 @@
                           <?php
                           require_once ("dbClass.php");
                           $db=new dbClass();
-                          if(isset($_POST['Id'])){
-                            $Bat=$db->getBatbyId($_POST['Id']); //get the bat fron DB by id
+                          if(isset($_SESSION['id'])&&isset($_POST['details'])&&isset($_POST['val'])){
+                            $Bat=$db->getBatbyId($_SESSION['id']); //get the bat fron DB by id
                             $choice="set".$_POST['details'];
                             $Bat->$choice($_POST['val']); //set the new value
                             $db->UpdateBatsherut($Bat);
